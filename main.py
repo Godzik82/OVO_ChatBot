@@ -5,13 +5,12 @@ from aiogram import Bot, Dispatcher
 from aiogram.enums.parse_mode import ParseMode
 from aiogram.fsm.storage.memory import MemoryStorage
 
-# import config
 from handlers import router
-from dotenv import dotenv_values
+import os
 
 async def main():
     
-    bot = Bot(token=dotenv_values()['BOT_TOKEN'], parse_mode=ParseMode.HTML)
+    bot = Bot(token=os.getenv("BOT_TOKEN"), parse_mode=ParseMode.HTML)
     dp =Dispatcher(storage=MemoryStorage())
     dp.include_router(router)
     await bot.delete_webhook(drop_pending_updates=True)
